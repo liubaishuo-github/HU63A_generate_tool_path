@@ -1,3 +1,4 @@
-list1 = ['X1.3', 'y0.333']
-for i in list1:
-    
+a = input("--------------------\n--------------------\nInput the GL:")
+print('========')
+print(a)
+print(type(a))

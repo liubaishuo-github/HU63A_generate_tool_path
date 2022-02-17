@@ -41,7 +41,7 @@ def transf(retrieved_coord):
 
     transfered_coord = []
     for i in retrieved_coord:
-        print(i)
+        #print(i)
         pch_x, pch_y, pch_z, pch_b, pch_c = float(i[1]), float(i[2]), float(i[3]), radians(float(i[4])), radians(float(i[5]))
         apt_coord = rot_x(-pch_c) * translation_x(-3) * rot_y(pch_b) * translation_z(37.3964) * mat([pch_x, pch_y, pch_z, 1]).T
         apt_x, apt_y, apt_z = apt_coord[0,0], apt_coord[1,0], apt_coord[2,0]
@@ -49,8 +49,24 @@ def transf(retrieved_coord):
         apt_vector = rot_x(-pch_c) * rot_y(pch_b) * mat([0,0,1,1]).T
         apt_i, apt_j, apt_k = apt_vector[0,0], apt_vector[1,0], apt_vector[2,0]
 
-        temp = [i[0], round(apt_x,5), round(apt_y,5), round(apt_z,5), round(apt_i,7), round(apt_j,7), round(apt_k,7)]
+        temp = [i[0], round(apt_x,5), round(apt_y,5), round(apt_z,5), round(apt_i,9), round(apt_j,9), round(apt_k,9)]
         transfered_coord.append(temp)
+
+    '''
+    output
+    '''
+    dir = os.getcwd()
+
+    filename_out = rf"{dir}\transfered_coord.txt"
+    file_out = open(filename_out, mode='w', encoding='utf-8')
+    for i in transfered_coord:
+        file_out.write(i[0].ljust(48) + ' ')
+        for j in i[1:]:
+            file_out.write(str(j).ljust(16) + ' ')
+        file_out.write('\n')
+    file_out.close
+
+
 
     return transfered_coord
 
